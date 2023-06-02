@@ -16,5 +16,5 @@ interface IResponse {
   status: 'success' | 'error' | 'failed';
   statusCode: number;
   message: string;
-  data?: Object | Array<string>;
+  data?: any;
 }
