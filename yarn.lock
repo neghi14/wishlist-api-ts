@@ -3025,7 +3025,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:*":
+"typescript@npm:^5.1.3":
   version: 5.1.3
   resolution: "typescript@npm:5.1.3"
   bin:
@@ -3035,7 +3035,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@*#~builtin<compat/typescript>":
+"typescript@patch:typescript@^5.1.3#~builtin<compat/typescript>":
   version: 5.1.3
   resolution: "typescript@patch:typescript@npm%3A5.1.3#~builtin<compat/typescript>::version=5.1.3&hash=5da071"
   bin:
@@ -3171,7 +3171,7 @@ __metadata:
     pino-pretty: ^10.0.0
     reflect-metadata: ^0.1.13
     tsyringe: ^4.7.0
-    typescript: "*"
+    typescript: ^5.1.3
   languageName: unknown
   linkType: soft
 
