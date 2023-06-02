@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import express, { Application, NextFunction, Request, Response } from 'express';
 import Server from './common/server/index.server';
 import databaseUtils from './common/utils/database.utils';

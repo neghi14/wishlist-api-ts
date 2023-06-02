@@ -1,6 +1,7 @@
-import { Application, Request, Response } from 'express';
+import { Application, NextFunction, Request, Response } from 'express';
 import Http from '../utils/http.utils';
 import { IError } from '../helpers/error.helpers';
+import userRoute from '../../module/User/routes/user.routes';
 
 export default class Router {
   http;
@@ -15,6 +16,9 @@ export default class Router {
       res.sendStatus(200);
     });
 
+    //ROUTES
+    this.app.use('/api/v1/user', userRoute);
+
     //ERROR HANDLING
     this.app.all('*', (req: Request, res: Response) => {
       this.http.Response({
@@ -25,7 +29,7 @@ export default class Router {
       });
     });
 
-    this.app.use((err: IError, req: Request, res: Response) => {
+    this.app.use((err: IError, req: Request, res: Response, next: NextFunction) => {
       err.status = err.status || 'error';
       err.statusCode = err.statusCode || 500;
       this.http.Response({
