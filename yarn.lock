@@ -184,15 +184,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/pino@npm:^7.0.5":
-  version: 7.0.5
-  resolution: "@types/pino@npm:7.0.5"
-  dependencies:
-    pino: "*"
-  checksum: f1c59f7d9a7b717e014e93a6e3f235cf824c93696f6530d41316a6188eb6e3846ce44941d2641665c6a4d0dc64a63ea24e277b2acff52e766ad7169e1a20f973
-  languageName: node
-  linkType: hard
-
 "@types/qs@npm:*":
   version: 6.9.7
   resolution: "@types/qs@npm:6.9.7"
@@ -2403,7 +2394,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pino@npm:*, pino@npm:^8.14.1":
+"pino@npm:^8.14.1":
   version: 8.14.1
   resolution: "pino@npm:8.14.1"
   dependencies:
@@ -3155,7 +3146,6 @@ __metadata:
   dependencies:
     "@types/config": ^3.3.0
     "@types/express": ^4.17.17
-    "@types/pino": ^7.0.5
     "@typescript-eslint/eslint-plugin": ^5.43.0
     config: ^3.3.9
     dayjs: ^1.11.7
