@@ -2,7 +2,7 @@ import mongoose, { Mongoose } from 'mongoose';
 import config from 'config';
 import logging from './logging.utils';
 
-class database {
+class Database {
   driver: Mongoose;
   url: string;
   constructor(driver: Mongoose) {
@@ -21,4 +21,4 @@ class database {
   }
 }
 
-export default new database(mongoose);
+export default new Database(mongoose);
