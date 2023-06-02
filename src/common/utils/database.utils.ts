@@ -26,9 +26,9 @@ class Database {
       return error;
     }
   }
-  async readOne(model: Model<any>, params: Record<string, string | any>) {
+  async readOne(model: Model<any> | undefined, params: Record<string, string | any>) {
     try {
-      return model.findOne(params);
+      return model?.findOne(params);
     } catch (error) {
       return error;
     }

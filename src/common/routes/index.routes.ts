@@ -2,6 +2,7 @@ import { Application, NextFunction, Request, Response } from 'express';
 import Http from '../utils/http.utils';
 import { IError } from '../helpers/error.helpers';
 import userRoute from '../../module/User/routes/user.routes';
+import sessionRoute from '../../module/Session/routes/session.routes';
 
 export default class Router {
   http;
@@ -18,6 +19,7 @@ export default class Router {
 
     //ROUTES
     this.app.use('/api/v1/user', userRoute);
+    this.app.use('/api/v1/session', sessionRoute);
 
     //ERROR HANDLING
     this.app.all('*', (req: Request, res: Response) => {

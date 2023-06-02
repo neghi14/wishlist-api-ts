@@ -1,8 +1,11 @@
 import 'reflect-metadata';
 import express, { Application, NextFunction, Request, Response } from 'express';
+import morgan from 'morgan';
 import Server from './common/server/index.server';
 import databaseUtils from './common/utils/database.utils';
 import Router from './common/routes/index.routes';
+import dotenv from 'dotenv';
+import config from 'config';
 
 const app: Application = express();
 
@@ -15,6 +18,9 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
   next();
 });
+if (config.get('env') === 'development') {
+  app.use(morgan('dev'));
+}
 
 //Router Config
 new Router(app).init();

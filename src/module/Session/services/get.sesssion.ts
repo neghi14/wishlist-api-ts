@@ -1,14 +1,14 @@
 import { injectable } from 'tsyringe';
 import Service from '../../../common/interface/service.interface';
-import UserRepository from '../repository/user.repository';
-import Http from '../../../common/utils/http.utils';
 import { NextFunction, Request, Response } from 'express';
+import Session from '../../../common/database/document/session.document';
 import { ParsedQs } from 'qs';
-import { omit } from 'lodash';
+import Http from '../../../common/utils/http.utils';
+import SessionRepository from '../repository/session.repository';
 
 @injectable()
-export default class GetUserService implements Service<Request, Response, NextFunction> {
-  constructor(private userRepository: UserRepository, private http: Http) {}
+export default class GetSessionService implements Service<Request, Response, NextFunction> {
+  constructor(private sessionRepository: SessionRepository, private http: Http) {}
   async execute(
     req: Request<{ id: string }, any, any, ParsedQs, Record<string, any>>,
     res: Response<any, Record<string, any>>,
@@ -16,16 +16,13 @@ export default class GetUserService implements Service<Request, Response, NextFu
   ): Promise<void> {
     try {
       const { id } = req.params;
-
-      const data = await this.userRepository.getOne({ _id: id });
-
-     // const  user = omit(data, 'password');
+      const data = await this.sessionRepository.getOne({_id: id});
 
       this.http.Response({
         res,
         status: 'success',
         statusCode: 200,
-        message: 'User Retrieved!',
+        message: 'Session Retrieved!',
         data,
       });
     } catch (error) {

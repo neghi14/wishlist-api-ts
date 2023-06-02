@@ -21,7 +21,7 @@ export default class GetUsersService implements Service<Request, Response, NextF
         res,
         status: 'success',
         statusCode: 200,
-        message: 'Users Retrieved Successfully',
+        message: 'Users Retrieved!',
         data,
       });
     } catch (error) {
