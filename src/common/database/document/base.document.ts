@@ -1,7 +1,6 @@
 import { Document } from 'mongoose';
 
 export default interface Base {
+  [key: string]: string | any;
   _id?: string;
-  created_at?: string;
-  updated_at?: string;
 }

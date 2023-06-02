@@ -23,7 +23,7 @@ export default class DeleteUserService implements Service<Request, Response, Nex
         res,
         status: 'success',
         statusCode: 200,
-        message: 'User Removed Successfully',
+        message: 'User Deleted!',
         data,
       });
     } catch (error) {

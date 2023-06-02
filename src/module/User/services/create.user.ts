@@ -25,15 +25,15 @@ export default class CreateUserService implements Service<Request, Response, Nex
         email,
         password: await hashed(password),
       };
-      const user = await this.userRepository.createOne(payload);
+      const data = await this.userRepository.createOne(payload);
 
-      const data = await omit(user, 'password');
+      //const data = await omit(user, 'password');
 
       this.http.Response({
         res,
         status: 'success',
         statusCode: 200,
-        message: 'User Created Successfully',
+        message: 'User Created!',
         data,
       });
     } catch (error) {

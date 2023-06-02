@@ -34,7 +34,7 @@ export default class UpdateUserService implements Service<Request, Response, Nex
         res,
         status: 'success',
         statusCode: 201,
-        message: 'User Updated Successfully',
+        message: 'User Updated!',
         data,
       });
     } catch (error) {

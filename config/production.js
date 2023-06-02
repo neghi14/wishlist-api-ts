@@ -3,6 +3,9 @@
 require('dotenv').config();
 
 module.exports = {
-  url: process.env.MONGODB_URI || ' ',
+  env: process.env.NODE_ENV,
+  url: process.env.MONGODB_URI,
   app: process.env.APP_URL,
+  private_key: process.env.TOKEN_PRIVATE_KEY,
+  public_key: process.env.TOKEN_PUBLIC_KEY,
 };
