@@ -1,5 +1,6 @@
 import { Application } from 'express';
 import config from 'config';
+import logging from '../utils/logging.utils';
 
 export default class Server {
   private app: Application;
@@ -10,7 +11,7 @@ export default class Server {
   }
   start() {
     this.app.listen(this.port, () => {
-      console.log('app running successfully on localhost');
+      logging.info(`Server up! visit at http://localhost:${this.port}`);
     });
   }
 }
