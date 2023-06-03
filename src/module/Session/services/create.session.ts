@@ -20,17 +20,23 @@ export default class CreateSessionService implements Service<Request, Response, 
     try {
       const { _id } = res.locals.user;
 
-      const session_exp = Buffer.from(config.get<string>('sessionTokenTtl'), 'base64').toString('ascii');
-      const refresh_exp = Buffer.from(config.get<string>('refreshTokenTtl'), 'base64').toString('ascii');
+      const session_exp = config.get<string>('sessionTokenTtl');
+      const refresh_exp = config.get<string>('refreshTokenTtl');
 
       const newSessionPayload: Session = {
         user: _id,
-        session_token: await signJwt(_id, {
-          expiresIn: session_exp,
-        }),
-        refresh_token: await signJwt(_id, {
-          expiresIn: refresh_exp,
-        }),
+        session_token: await signJwt(
+          { _id },
+          {
+            expiresIn: session_exp,
+          }
+        ),
+        refresh_token: await signJwt(
+          { _id },
+          {
+            expiresIn: refresh_exp,
+          }
+        ),
       };
 
       const data = await this.sessionRepository.createOne(newSessionPayload);

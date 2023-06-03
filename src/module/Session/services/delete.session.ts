@@ -8,6 +8,7 @@ import { ParsedQs } from 'qs';
 import Session from '../../../common/database/document/session.document';
 import { signJwt } from '../../../common/utils/jwt.utils';
 import config from 'config';
+import ErrorHelper from '../../../common/helpers/error.helpers';
 
 @injectable()
 export default class DeleteSessionService implements Service<Request, Response, NextFunction> {
@@ -21,13 +22,14 @@ export default class DeleteSessionService implements Service<Request, Response, 
       const { id } = req.params;
 
       const data = await this.sessionRepository.deleteOne({ _id: id });
-
+      if (!data) {
+        return next(new ErrorHelper('Session Not Found', 404));
+      }
       this.http.Response({
         res,
         status: 'success',
         statusCode: 200,
         message: 'Session Deleted!',
-        data,
       });
     } catch (error) {
       return next(error);

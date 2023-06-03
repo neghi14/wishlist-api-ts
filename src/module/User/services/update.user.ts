@@ -7,6 +7,7 @@ import { ParsedQs } from 'qs';
 import User from '../../../common/database/document/user.document';
 import { hashed } from '../../../common/utils/bcrypt.utils';
 import { omit } from 'lodash';
+import ErrorHelper from '../../../common/helpers/error.helpers';
 
 @injectable()
 export default class UpdateUserService implements Service<Request, Response, NextFunction> {
@@ -26,10 +27,12 @@ export default class UpdateUserService implements Service<Request, Response, Nex
         email,
         password: await hashed(password),
       };
-      const user = await this.userRepository.updateOne({ _id: id }, payload);
+      const data = await this.userRepository.updateOne({ _id: id }, payload);
 
-      const data = omit(user.JSON(), 'password');
-
+      //  const user = omit(data.JSON(), 'password');
+      if (!data) {
+        return next(new ErrorHelper('User Not Found', 404));
+      }
       this.http.Response({
         res,
         status: 'success',

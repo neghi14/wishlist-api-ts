@@ -12,7 +12,7 @@ export default class UserRepository implements CRUD {
   async getAll(query: Record<string, any>): Promise<any> {
     return await databaseUtils.readAll(userModel, query);
   }
-  async createOne(payload: User): Promise<void> {
+  async createOne(payload: User): Promise<any> {
     return await databaseUtils.createOne(userModel, payload);
   }
   async updateOne(params: User, payload: User): Promise<any> {

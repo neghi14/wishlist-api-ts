@@ -5,6 +5,7 @@ import Http from '../../../common/utils/http.utils';
 import { NextFunction, Request, Response } from 'express';
 import { ParsedQs } from 'qs';
 import { omit } from 'lodash';
+import ErrorHelper from '../../../common/helpers/error.helpers';
 
 @injectable()
 export default class DeleteUserService implements Service<Request, Response, NextFunction> {
@@ -19,12 +20,15 @@ export default class DeleteUserService implements Service<Request, Response, Nex
 
       const data = await this.userRepository.deleteOne({ _id: id });
 
+      if (!data) {
+        return next(new ErrorHelper('User Not Found', 404));
+      }
+
       this.http.Response({
         res,
         status: 'success',
         statusCode: 200,
         message: 'User Deleted!',
-        data,
       });
     } catch (error) {
       return next(error);

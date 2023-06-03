@@ -7,3 +7,10 @@ export const hashed = (password: any): Promise<any> => {
     return error;
   }
 };
+export const verifyHash = (password: string, data: string) => {
+  try {
+    return bcrypt.compare(password, data);
+  } catch (error) {
+    return error;
+  }
+};

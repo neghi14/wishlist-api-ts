@@ -5,6 +5,7 @@ import Http from '../../../common/utils/http.utils';
 import { NextFunction, Request, Response } from 'express';
 import { ParsedQs } from 'qs';
 import { omit } from 'lodash';
+import ErrorHelper from '../../../common/helpers/error.helpers';
 
 @injectable()
 export default class GetUserService implements Service<Request, Response, NextFunction> {
@@ -19,7 +20,10 @@ export default class GetUserService implements Service<Request, Response, NextFu
 
       const data = await this.userRepository.getOne({ _id: id });
 
-     // const  user = omit(data, 'password');
+      // const  user = omit(data, 'password');
+      if (!data) {
+        return next(new ErrorHelper('User Not Found', 404));
+      }
 
       this.http.Response({
         res,

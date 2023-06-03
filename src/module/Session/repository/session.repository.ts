@@ -6,19 +6,19 @@ import Session from '../../../common/database/document/session.document';
 
 @injectable()
 export default class SessionRepository implements CRUD {
-  async getOne(params: Record<string, any>): Promise<void> {
+  async getOne(params: Record<string, any>): Promise<any> {
     return await databaseUtils.readOne(sessionModel, params);
   }
   async getAll(query: Record<string, any>): Promise<any> {
     return await databaseUtils.readAll(sessionModel, query);
   }
-  async createOne(payload: Session): Promise<void> {
+  async createOne(payload: Session): Promise<any> {
     return await databaseUtils.createOne(sessionModel, payload);
   }
-  async updateOne(params: Record<string, any>, payload: Session): Promise<void> {
+  async updateOne(params: Record<string, any>, payload: Session): Promise<any> {
     return await databaseUtils.updateOne(sessionModel, params, payload);
   }
-  async deleteOne(params: Record<string, any>): Promise<void> {
+  async deleteOne(params: Record<string, any>): Promise<any> {
     return await databaseUtils.deleteOne(sessionModel, params);
   }
 }
