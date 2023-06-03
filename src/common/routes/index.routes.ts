@@ -5,6 +5,7 @@ import userRoute from '../../module/User/routes/user.routes';
 import sessionRoute from '../../module/Session/routes/session.routes';
 import authRoute from '../../module/User/routes/auth/auth.routes';
 import listRoute from '../../module/List/routes/list.routes';
+import wishRoute from '../../module/Wish/routes/wish.routes';
 
 export default class Router {
   http;
@@ -24,6 +25,7 @@ export default class Router {
     this.app.use('/api/v1/list', listRoute);
     this.app.use('/api/v1/user', userRoute);
     this.app.use('/api/v1/session', sessionRoute);
+    this.app.use('/api/v1/wish', wishRoute);
 
     //ERROR HANDLING
     this.app.all('*', (req: Request, res: Response) => {
