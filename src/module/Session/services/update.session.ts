@@ -8,6 +8,7 @@ import { ParsedQs } from 'qs';
 import Session from '../../../common/database/document/session.document';
 import { signJwt } from '../../../common/utils/jwt.utils';
 import config from 'config';
+import ErrorHelper from '../../../common/helpers/error.helpers';
 
 @injectable()
 export default class UpdateSessionService implements Service<Request, Response, NextFunction> {
@@ -21,16 +22,22 @@ export default class UpdateSessionService implements Service<Request, Response, 
       const { _id } = res.locals.user;
       const { id } = req.params;
 
-      const session_exp = Buffer.from(config.get<string>('sessionTokenTtl'), 'base64').toString('ascii');
-      const refresh_exp = Buffer.from(config.get<string>('refreshTokenTtl'), 'base64').toString('ascii');
+      const refresh_exp = config.get<string>('refreshTokenTtl');
 
       const newSessionPayload: Session = {
-        refresh_token: await signJwt(_id, {
-          expiresIn: refresh_exp,
-        }),
+        refresh_token: await signJwt(
+          { _id },
+          {
+            expiresIn: refresh_exp,
+          }
+        ),
       };
 
       const data = await this.sessionRepository.updateOne({ _id: id }, newSessionPayload);
+
+      if (!data) {
+        return next(new ErrorHelper('Session Not Found', 404));
+      }
 
       this.http.Response({
         res,

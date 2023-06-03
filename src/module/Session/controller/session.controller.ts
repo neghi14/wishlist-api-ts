@@ -10,7 +10,7 @@ import { ParamsDictionary } from 'express-serve-static-core';
 import { ParsedQs } from 'qs';
 
 @injectable()
-export default class UserController implements Controller<Request, Response, NextFunction> {
+export default class SessionController implements Controller<Request, Response, NextFunction> {
   constructor(
     private readOne: GetSessionService,
     private readAll: GetSessionsService,

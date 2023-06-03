@@ -1,10 +1,11 @@
 import jwt from 'jsonwebtoken';
 import config from 'config';
+import User from '../database/document/user.document';
 
 const privateKey: string = Buffer.from(config.get<string>('private_key'), 'base64').toString('ascii');
 const publicKey: string = Buffer.from(config.get<string>('public_key'), 'base64').toString('ascii');
 
-export const signJwt = (data: string, options?: jwt.SignOptions): any => {
+export const signJwt = (data: User, options?: jwt.SignOptions): any => {
   try {
     return jwt.sign(data, privateKey, {
       ...(options && options),

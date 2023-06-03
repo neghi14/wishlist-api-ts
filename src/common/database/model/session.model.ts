@@ -9,6 +9,7 @@ const SessionSchema: Schema = new Schema<Session>(
       type: Schema.Types.ObjectId,
       ref: 'Users',
     },
+    is_valid: Boolean,
   },
   {
     timestamps: true,

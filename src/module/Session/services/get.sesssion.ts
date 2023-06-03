@@ -5,6 +5,7 @@ import Session from '../../../common/database/document/session.document';
 import { ParsedQs } from 'qs';
 import Http from '../../../common/utils/http.utils';
 import SessionRepository from '../repository/session.repository';
+import ErrorHelper from '../../../common/helpers/error.helpers';
 
 @injectable()
 export default class GetSessionService implements Service<Request, Response, NextFunction> {
@@ -16,7 +17,10 @@ export default class GetSessionService implements Service<Request, Response, Nex
   ): Promise<void> {
     try {
       const { id } = req.params;
-      const data = await this.sessionRepository.getOne({_id: id});
+      const data = await this.sessionRepository.getOne({ _id: id });
+      if (!data) {
+        return next(new ErrorHelper('Session Not Found', 404));
+      }
 
       this.http.Response({
         res,
